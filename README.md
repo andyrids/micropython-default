@@ -156,7 +156,7 @@ The default password to connect to the Pico W will be the <PICO_SERIAL_NUMBER> i
 
 ![WLAN](./img/PICO_W_WLAN.png)
 
-You can view the WLAN credentials form by navigating to `http://192.168.4.1:80`.
+You can view the WLAN credentials form by navigating to `http://192.168.4.1:80` or the on the [GitHub page](https://andyrids.github.io/micropython-default/) for this project. On the Github page, the Device & MicroPython version details are unavailable as these are populated based on your Pico W details.
 
 ![WLAN](./img/PICO_W_FORM.png)
 
