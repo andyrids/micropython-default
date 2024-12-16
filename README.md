@@ -7,14 +7,14 @@
 
 This MicroPython project acts as a template, which forms the basis for creating a Pico W 'thing' in an AWS IoT Core context. It also acts as a template for Micropython projects that need to facilitate access to WiFi through serving a credentials form. The default `main.py` runs an async application function (`async_main`), which carries out the following steps:
 
-1. Attempt WLAN STA connection using env/secrets
+1. Attempt WiFi STA connection using env/secrets
 2. Synchronise network time on STA connection
 3. Monitor for connection issues
 4. Wait 15 seconds and check connection again
-5. Start Microdot server on WLAN connection fail
-    1. Serve HTML form to update WLAN credentials
+5. Start Microdot server on WiFi connection fail
+    1. Serve HTML form to update WiFi credentials
     2. Update env/secrets if correct
-    3. Shutdown server & attempt WLAN connection
+    3. Shutdown server & attempt WiFi connection
     4. Synchronise network time on STA connection
 6. Repeat steps 3 - 5 as necessary
 
@@ -37,7 +37,7 @@ micropython-default
 ```text
 micropython-default
 ├── env
-│   └── secrets.py                  <-- WLAN credentials for STA/AP mode
+│   └── secrets.py                  <-- WiFi credentials for STA/AP mode
 ├── lib
 │   ├── microdot                    <-- microdot library
 │   │   ├── __init__.py
@@ -58,7 +58,7 @@ micropython-default
 
 `micropython-default/src/micropython_default` is the main project directory.
 
-The `env/secrets.py` is used to store credentials to connect to a WLAN and to connect to the Pico, when in AP mode. The default secrets file contents are shown below:
+The `env/secrets.py` is used to store credentials to connect to a WiFi network and to connect to the Pico, when in AP mode. The default secrets file contents are shown below:
 
 ```python
 AP_SSID = None
