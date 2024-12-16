@@ -242,8 +242,6 @@ As the application is async, commands can still be issued to the device, includi
 
 ## Credits
 
-### MicroPython asyncio guide
-
 1. Peter Hinch's excellent guide on [asyncio](https://github.com/peterhinch/micropython-async)
 2. [Microdot](https://microdot.readthedocs.io/en/latest/) minimalistic Python web framework inspired by Flask
 3. A detailed guide on [mpremote](https://wellys.com/posts/rp2040_mpremote/)
