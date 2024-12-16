@@ -1,0 +1,67 @@
+[project]
+name = "micropython-default"
+description = "Micropython project template for the Raspberry Pi Pico W"
+authors = [{name = "Andrew Ridyard", email = "ridyard12@gmail.com"}]
+maintainers = [{name = "Andrew Ridyard", email = "ridyard12@gmail.com"}]
+version = "0.0.1"
+license = {file = "LICENSE"}
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
+classifiers=[
+    # 3 - Alpha | 4 - Beta | 5 - Production/Stable
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPL-3.0-or-later)",
+    "Natural Language :: English",
+    # Python versions
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Embedded Systems",
+]
+keywords = ["rpi", "pico", "micropython", "bootstrap", "microdot"]
+dependencies = [
+    "mpremote>=1.24.0",
+    "mpy-cross>=1.24.0.post2",
+]
+
+[dependency-groups]
+dev = [
+    "bumpversion>=0.6.0",
+    "micropython-rp2-rpi-pico-w-stubs>=1.23.0.post2",
+    "pytest>=8.3.3",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.7.4",
+]
+
+[project.urls]
+Repository = "https://github.com/andyrids/cookiecutter-aws-iot-pico-thing"
+Issues = "https://github.com/andyrids/cookiecutter-aws-iot-pico-thing/issues"
+
+
+[tool.ruff]
+exclude = ["lib", "env"]
+indent-width = 4
+line-length = 80
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "auto"
+quote-style = "double"
+
+[tool.ruff.lint]
+select = [
+    "D1",  # pydocstyle
+    "E",   # pycodestyle
+    "ERA", # commented out code
+    "W",   # pycodestyle
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]

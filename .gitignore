@@ -1,0 +1,16 @@
+# MicroPython precompiled
+**/*.mpy
+
+# Certificates
+certs/*.key
+certs/*.crt
+certs/*.der
+
+# Export
+export/*
+
+# Default
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv
