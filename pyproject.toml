@@ -26,6 +26,7 @@ keywords = ["rpi", "pico", "micropython", "bootstrap", "microdot"]
 dependencies = [
     "mpremote>=1.24.0",
     "mpy-cross>=1.24.0.post2",
+    "picoproject @ git+https://github.com/andyrids/picoproject",
 ]
 
 [dependency-groups]
@@ -65,3 +66,6 @@ convention = "google"
 
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
+
+[tool.uv.sources]
+picoproject = { git = "https://github.com/andyrids/picoproject" }

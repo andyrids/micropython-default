@@ -11,6 +11,9 @@ export/*
 
 # Default
 __pycache__/
+htmlcov/
+.coverage
+.coverage.*
 .pytest_cache/
 .ruff_cache/
 .venv
