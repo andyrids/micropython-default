@@ -23,14 +23,16 @@ Modification of `async_main` should allow extra functionality, such as connectio
 This project has the following dependency tree:
 
 ```text
-micropython-default
-├── mpremote                                       <-- used to interface with the Pico filesystem
-│   └── pyserial
-├── mpy-cross <-- MicroPython cross-compiler
-├── micropython-rp2-rpi-pico-w-stubs (group: dev)  <-- MicroPython Pico W stubs
-│   └── micropython-stdlib-stubs 
-└── ruff v0.8.3 (group: dev)                       <-- Linting/formatting
+micropython-default v0.0.1
+├── picoproject v0.0.3                                           <-- MicroPython project CLI
+├── bump-my-version v0.29.0 (group: dev)
+├── micropython-rp2-rpi-pico-w-stubs v1.23.0.post2 (group: dev)  <-- MicroPython Pico W stubs
+├── pytest v8.3.4 (group: dev)
+├── pytest-cov v6.0.0 (group: dev)
+└── ruff v0.8.3 (group: dev)                                     <-- Linting/formatting
 ```
+
+picoproject is a CLI (see [picoproject](https://github.com/andyrids/picoproject))
 
 ## Project Layout
 

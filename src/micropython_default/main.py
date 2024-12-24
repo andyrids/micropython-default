@@ -38,7 +38,6 @@ Raises:
 NOTE: Set _VERBOSE to True for verbose debug messages.
 """
 
-
 import array
 import asyncio
 import binascii
@@ -82,6 +81,7 @@ def fn() -> None:
 
 FunctionType = type(fn)
 
+
 async def synchronise_time(verbose: bool = False) -> bool:
     """Coroutine to set Network Time Protocol (NTP) and synchronize the time
     on successful WLAN connection/re-connection.
@@ -97,7 +97,7 @@ async def synchronise_time(verbose: bool = False) -> bool:
     """
 
     debug_message("ASYNC TASK - SYNCHRONISE NETWORK TIME", verbose)
-    try: # 30 attempts
+    try:  # 30 attempts
         attempt = iter(range(30))
         while next(attempt) >= 0:
             try:
@@ -157,16 +157,14 @@ async def microdot_server(app: Microdot, verbose: bool = False) -> None:
         """Send index.html to client"""
         return send_file("server/index.html", compressed=False)
 
-
     @app.route("/system", methods=["GET"])
     async def system_information(request):
         """Send system information JSON to client."""
         system_details = os.uname()
         return {
             "device-description": system_details.machine,
-            "micropython-version": system_details.release
+            "micropython-version": system_details.release,
         }
-
 
     @app.route("/assets/<path:path>", methods=["GET"])
     async def fetch_assets(request, path):
@@ -175,9 +173,8 @@ async def microdot_server(app: Microdot, verbose: bool = False) -> None:
             f"server/assets/{path}",
             max_age=86400,
             compressed=True,
-            file_extension=".gz"
+            file_extension=".gz",
         )
-
 
     @app.route("/connection", methods=["POST"])
     async def set_connection(request):
@@ -187,10 +184,9 @@ async def microdot_server(app: Microdot, verbose: bool = False) -> None:
 
         dynamic_set_secret("WLAN_PASSWORD", WLAN_PASSWORD)
         if not dynamic_set_secret("WLAN_SSID", WLAN_SSID):
-            return { "request": True, "valid": False }, 400
+            return {"request": True, "valid": False}, 400
         # SSID was valid
-        return { "request": True, "valid": True }, 205
-
+        return {"request": True, "valid": True}, 205
 
     @app.route("/reset", methods=["GET"])
     async def reset(request):
@@ -203,10 +199,8 @@ async def microdot_server(app: Microdot, verbose: bool = False) -> None:
 
 
 def event_timer(
-        event: asyncio.Event,
-        period: int,
-        verbose: bool = False
-    ) -> Timer:
+    event: asyncio.Event, period: int, verbose: bool = False
+) -> Timer:
     """Creates a periodic Timer instance, which calls the internal set_event
     function after a duration set by the period parameter. The set_event
     callback will set the internal flag of the event parameter, causing any
@@ -220,6 +214,7 @@ def event_timer(
     Returns:
         Timer instance.
     """
+
     def set_event(t: Timer) -> None:
         """Set Event internal flag on timer end."""
         debug_message(f"EVENT TIMER ({period} ms) - SETTING EVENT", verbose)
@@ -249,10 +244,8 @@ async def catch_async_interrupt(coroutine: FunctionType, **kwargs) -> None:
 
 
 async def handle_async_exception(
-        loop: asyncio.Loop,
-        context: dict,
-        verbose: bool = True
-    ) -> None:
+    loop: asyncio.Loop, context: dict, verbose: bool = True
+) -> None:
     """Exception handler for coroutines run as a Task via the
     asyncio.create_task method.
 
@@ -316,7 +309,7 @@ async def async_main(verbose: bool = False):
     # check if WLAN connected in STA mode
     if not connection_issue(WLAN, WLAN_MODE, verbose):
         # if 'synchronise_time' coroutine completes successfully...
-        if (await synchronise_time(verbose)):
+        if await synchronise_time(verbose):
             # we indicate no connection issues
             async_events["connection_issue"].set()
         else:

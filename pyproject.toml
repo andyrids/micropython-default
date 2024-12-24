@@ -24,14 +24,12 @@ classifiers=[
 ]
 keywords = ["rpi", "pico", "micropython", "bootstrap", "microdot"]
 dependencies = [
-    "mpremote>=1.24.0",
-    "mpy-cross>=1.24.0.post2",
     "picoproject @ git+https://github.com/andyrids/picoproject",
 ]
 
 [dependency-groups]
 dev = [
-    "bumpversion>=0.6.0",
+    "bump-my-version>=0.29.0",
     "micropython-rp2-rpi-pico-w-stubs>=1.23.0.post2",
     "pytest>=8.3.3",
     "pytest-cov>=6.0.0",
