@@ -32,7 +32,7 @@ micropython-default v0.0.1
 └── ruff v0.8.3 (group: dev)                                     <-- Linting/formatting
 ```
 
-picoproject is a CLI (see [picoproject](https://github.com/andyrids/picoproject))
+I am testing the use of another library, picoproject, which is a CLI (README[repository](https://github.com/andyrids/picoproject)) for managing local installation of MicroPython packages for development, MicroPython binary compilation and exporting of project files.
 
 ## Project Layout
 
