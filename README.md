@@ -23,13 +23,13 @@ Modification of `async_main` should allow extra functionality, such as connectio
 This project has the following dependency tree:
 
 ```text
-micropython-default v0.0.1
-├── picoproject v0.0.3                                           <-- MicroPython project CLI
-├── bump-my-version v0.29.0 (group: dev)
-├── micropython-rp2-rpi-pico-w-stubs v1.23.0.post2 (group: dev)  <-- MicroPython Pico W stubs
-├── pytest v8.3.4 (group: dev)
-├── pytest-cov v6.0.0 (group: dev)
-└── ruff v0.8.3 (group: dev)                                     <-- Linting/formatting
+micropython-default
+├── picoproject                       <-- MicroPython project CLI
+├── bump-my-version (group: dev)
+├── micropython-rp2-rpi-pico-w-stubs  <-- MicroPython Pico W stubs
+├── ruff (group: dev)                 <-- Linting/formatting
+├── sphinx (group: dev)               <-- Documentation
+└── sphinx-rtd-theme (group: dev)     <-- Read the docs theme
 ```
 
 I am testing the use of another library, picoproject, which is a CLI (README[repository](https://github.com/andyrids/picoproject)) for managing local installation of MicroPython packages for development, MicroPython binary compilation and exporting of project files.
@@ -37,7 +37,7 @@ I am testing the use of another library, picoproject, which is a CLI (README[rep
 ## Project Layout
 
 ```text
-micropython-default
+src/micropython_default
 ├── env
 │   └── secrets.py                  <-- WiFi credentials for STA/AP mode
 ├── lib
@@ -94,14 +94,14 @@ guide @ [uv documentation](https://docs.astral.sh/uv/getting-started/installatio
 
 The following command will sync the project dependencies and create a virtual environment:
 
-```sh
+```bash
 cd <project directory>
 uv sync
 ```
 
 Activate the virtual environment created by uv with the following command:
 
-```sh
+```bash
 source .venv/bin/activate
 ```
 
@@ -112,20 +112,27 @@ source .venv/bin/activate
 
 Check your Pico's current filesystem with the following mpremote command:
 
-```sh
+```bash
 (micropython-default) mpremote fs ls
 ```
 
 Output of `ls :` will indicate an empty system. The following command will clear the Pico filesystem (use caution):
 
-```sh
+```bash
 (micropython-default) mpremote exec --no-follow "import os, machine, rp2; os.umount('/'); bdev = rp2.Flash(); os.VfsLfs2.mkfs(bdev, progsize=256); vfs = os.VfsLfs2(bdev, progsize=256); os.mount(vfs, '/'); machine.reset()"
 ```
+
+With the recent **picoproject** CLI dependency, you can also th command below, which will use mpreote in the background to format the device.
+
+```bash
+(micropython-default) CLI format
+```
+
 
 From the project root directory, the following command will recursively copy all files within the project
 directory to the Pico W filesystem:
 
-```sh
+```bash
 $ (micropython-default) mpremote cp -r ./src/micropython_default/* :
 cp ./src/micropython_default/env :
 cp ./src/micropython_default/lib :
@@ -135,39 +142,39 @@ cp ./src/micropython_default/server :
 
 You can verify this with the following command:
 
-```sh
+```bash
 (micropython-default) mpremote fs ls
 ```
 
 A hard reset of the device and a connection to the device REPL, will allow you to view the application running with verbose
 debug messages (set main.py `_VERBOSE` global variable to False to disable):
 
-```sh
-(aws-iot-pico-test-thing) mpremote reset
+```bash
+(micropython-default) mpremote reset
 ```
 
 Connect to the device to view the verbose debug messages:
 
 ```sh
-(aws-iot-pico-test-thing) mpremote
+(micropython-default) mpremote
 ```
 
 If you have not set credentials in `env/secrets.py`, the application will detect a connection issue and initialise the Pico WLAN in AP mode and start a microdot server. You can connect to the Pico W WLAN, which will have an SSID like PICO-W-<PICO_SERIAL_NUMBER> e.g. 'PICO-W-E66161234567891B'.
 
 The default password to connect to the Pico W will be the <PICO_SERIAL_NUMBER> in the SSID, unless you have set another value in `env/secrets.py` e.g. `AP_PASSWORD = "my_password"`.
 
-![WLAN](./img/PICO_W_WLAN.png)
+![WLAN](./docs/img/PICO_W_WLAN.png)
 
 You can view the WLAN credentials form by navigating to `http://192.168.4.1:80` or the on the [GitHub page](https://andyrids.github.io/micropython-default/) for this project. On the Github page, the Device & MicroPython version details are unavailable as these are populated based on your Pico W details.
 
-![WLAN](./img/PICO_W_FORM.png)
+![WLAN](./docs/img/PICO_W_FORM.png)
 
 > [!WARNING]  
 > Must be HTTP - i.e. `http://192.168.4.1:80/`
 
 Example output:
 
-```sh
+```bash
 $ (micropython-default) mpremote
 Connected to MicroPython at /dev/ttyACM0
 Use Ctrl-] or Ctrl-x to exit this shell
@@ -197,7 +204,7 @@ ASYNC TASK - GARBAGE COLLECTION
 
 After the WLAN credentials form has been submitted and credentials prove to be correct:
 
-```sh
+```bash
 POST /connection 205
 ASYNC TASK - MICRODOT SERVER SHUTDOWN
 RESETTING WLAN INTERFACE
@@ -232,7 +239,7 @@ SET NTPTIME SUCCESS - 2024-12-16 21:26:1
 
 You can interrupt the main application from the REPL you connected to with the last `mpremote` command, by pressing ctrl + c.
 
-```sh
+```bash
 ASYNC TASK - GARBAGE COLLECTION
 ASYNC TASK - GARBAGE COLLECTION
 ASYNCIO.RUN KeyboardInterrupt
@@ -241,6 +248,15 @@ ASYNCIO.RUN TERMINATE
 ```
 
 As the application is async, commands can still be issued to the device, including a hard reset or filesystem wipe using mpremote.
+
+## Sphinx Documentation
+
+To build the documentation with sphinx, follow the commands below:
+
+```bash
+(micropython-default) cd docs
+(micropython-default) make html
+```
 
 ## Credits
 

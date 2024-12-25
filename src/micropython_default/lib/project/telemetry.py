@@ -2,7 +2,9 @@
 readings such as vsys and internal temperature on ADC 3.
 
 Author: Andrew Ridyard.
+
 License: GNU General Public License v3 or later.
+
 Copyright (C): 2024.
 
 This program is free software: you can redistribute it and/or modify

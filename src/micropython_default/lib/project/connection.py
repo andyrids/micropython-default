@@ -2,7 +2,9 @@
 network and MQTT client connections.
 
 Author: Andrew Ridyard.
+
 License: GNU General Public License v3 or later.
+
 Copyright (C): 2024.
 
 This program is free software: you can redistribute it and/or modify

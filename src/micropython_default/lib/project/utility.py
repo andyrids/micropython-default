@@ -1,7 +1,9 @@
 """Utility module containing helper functions.
 
 Author: Andrew Ridyard.
+
 License: GNU General Public License v3 or later.
+
 Copyright (C): 2024.
 
 This program is free software: you can redistribute it and/or modify
@@ -24,6 +26,7 @@ Functions:
     dynamic_set_secret: Write secret to /env/secrets.py.
 """
 
+import network
 import os
 import sys
 

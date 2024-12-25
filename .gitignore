@@ -11,6 +11,7 @@ export/*
 
 # Default
 __pycache__/
+docs/build/*
 htmlcov/
 .coverage
 .coverage.*
