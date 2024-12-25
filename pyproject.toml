@@ -3,7 +3,7 @@ name = "micropython-default"
 description = "Micropython project template for the Raspberry Pi Pico W"
 authors = [{name = "Andrew Ridyard", email = "ridyard12@gmail.com"}]
 maintainers = [{name = "Andrew Ridyard", email = "ridyard12@gmail.com"}]
-version = "0.0.1"
+version = "0.0.2"
 license = {file = "LICENSE"}
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
@@ -68,7 +68,7 @@ addopts = ["--import-mode=importlib"]
 picoproject = { git = "https://github.com/andyrids/picoproject" }
 
 [tool.bumpversion]
-current_version = "0.0.1"
+current_version = "0.0.2"
 commit = true
 commit_args = "--no-verify"
 tag = true
